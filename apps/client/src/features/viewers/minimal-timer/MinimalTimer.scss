@@ -2,9 +2,11 @@
 
 .minimal-timer {
   margin: 0;
-  box-sizing: border-box; /* reset */
+  box-sizing: border-box;
+  /* reset */
   overflow: hidden;
-  width: 100%; /* restrict the page width to viewport */
+  width: 100%;
+  /* restrict the page width to viewport */
   height: 100vh;
   transition: opacity 0.5s ease-in-out;
 
@@ -20,7 +22,7 @@
   }
 
   .timer {
-    font-family: var(--font-family-bold-override, $timer-bold-font-family) ;
+    font-family: var(--font-family-bold-override, $timer-bold-font-family);
     font-size: 20vw;
     position: relative;
     color: var(--timer-color-override, $timer-color);
@@ -37,6 +39,19 @@
 
     &--finished {
       color: $timer-finished-color;
+    }
+  }
+
+  .progress-container {
+    grid-area: progress;
+    width: 100%;
+    margin: 0 auto;
+    opacity: 1;
+    transition: $viewer-transition-time;
+
+    &--paused {
+      opacity: $viewer-opacity-disabled;
+      transition: $viewer-transition-time;
     }
   }
 
@@ -79,11 +94,11 @@
   }
 
   .end-message {
-      text-align: center;
-      font-size: 12vw;
-      line-height: 0.9em;
-      font-weight: 600;
-      color: $timer-finished-color;
-      padding: 0;
-    }
+    text-align: center;
+    font-size: 12vw;
+    line-height: 0.9em;
+    font-weight: 600;
+    color: $timer-finished-color;
+    padding: 0;
+  }
 }

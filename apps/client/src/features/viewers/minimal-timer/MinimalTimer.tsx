@@ -11,6 +11,7 @@ import { TimeManagerType } from '../../../common/models/TimeManager.type';
 import { OverridableOptions } from '../../../common/models/View.types';
 import { isStringBoolean } from '../../../common/utils/viewUtils';
 import { formatTimerDisplay, getTimerByType } from '../common/viewerUtils';
+import MultiPartProgressBar from '../../../common/components/multi-part-progress-bar/MultiPartProgressBar';
 
 import './MinimalTimer.scss';
 
@@ -133,6 +134,7 @@ export default function MinimalTimer(props: MinimalTimerProps) {
   const showEndMessage = (time.current ?? 0) < 0 && viewSettings.endMessage && !hideEndMessage;
   const finished = time.playback === Playback.Play && (time.current ?? 0) < 0 && time.startedAt;
   const showFinished = finished && !userOptions?.hideOvertime && (time.timerType !== TimerType.Clock || showEndMessage);
+  const totalTime = (time.duration ?? 0) + (time.addedTime ?? 0);
 
   const showProgress = time.playback !== Playback.Stop;
   const showWarning = (time.current ?? 1) < viewSettings.warningThreshold * 1000;
@@ -196,6 +198,19 @@ export default function MinimalTimer(props: MinimalTimerProps) {
           }}
         >
           {display}
+          
+        <MultiPartProgressBar
+          className={isPlaying ? 'progress-container' : 'progress-container progress-container--paused'}
+          now={time.current || 0}
+          complete={totalTime}
+          normalColor={viewSettings.normalColor}
+          warning={viewSettings.warningThreshold * 1000}
+          warningColor={viewSettings.warningColor}
+          danger={viewSettings.dangerThreshold * 1000}
+          dangerColor={viewSettings.dangerColor}
+          hidden={!showProgress}
+        />
+
         </div>
       )}
     </div>

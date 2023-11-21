@@ -2,9 +2,11 @@
 
 .stage-timer {
   margin: 0;
-  box-sizing: border-box; /* reset */
+  box-sizing: border-box;
+  /* reset */
   overflow: hidden;
-  width: 100%; /* restrict the page width to viewport */
+  width: 100%;
+  /* restrict the page width to viewport */
 
   background: var(--background-color-override, $viewer-background-color);
   height: 100vh;
@@ -19,6 +21,10 @@
     ' now  now  .... next next';
   gap: 1vw;
   padding: 1vw;
+
+  &--wrapup {
+    border: 1vw solid $timer-wrapup-color;
+  }
 
   &--finished {
     border: 1vw solid $timer-finished-color;
@@ -37,6 +43,7 @@
       grid-area: now;
 
     }
+
     &.next {
       grid-area: next;
     }

@@ -3,7 +3,7 @@ version: "3"
 services:
   ontime:
     container_name: ontime
-    image: getontime/ontime:latest
+    image: ontime_tim:latest 
     ports:
       - "4001:4001/tcp"
       - "127.0.0.1:8888:8888/udp"
@@ -11,5 +11,5 @@ services:
       - "./ontime-db:/server/preloaded-db"
       - "./ontime-external:/server/external"
     environment:
-      - TZ=Asia/Singapore
+      - TZ=America/New_York
     restart: unless-stopped

@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import TimerDisplay from 'common/components/countdown/TimerDisplay';
 import MyProgressBar from 'common/components/myProgressBar/MyProgressBar';
 import NavLogo from 'common/components/nav/NavLogo';
@@ -7,6 +5,8 @@ import TitleCard from 'common/components/title-card/TitleCard';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAtom } from 'jotai';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { overrideStylesURL } from '../../../common/api/apiConstants';
 import { mirrorViewersAtom } from '../../../common/atoms/ViewerSettings';
@@ -66,9 +66,9 @@ export default function Timer(props) {
     },
   };
   const baseClasses = `stage-timer ${isMirrored ? 'mirror' : ''}`;
-
   return (
-    <div className={time.finished ? `${baseClasses} stage-timer--finished` : baseClasses}>
+    <div className={time.finished ? `${baseClasses} stage-timer--finished` : time.running <= 15 ? `${baseClasses} stage-timer--wrapup` : baseClasses
+    }>
       <div className={showOverlay ? 'message-overlay message-overlay--active' : 'message-overlay'}>
         <div className='message'>{pres.text}</div>
       </div>
@@ -91,24 +91,26 @@ export default function Timer(props) {
           </div>
         ) : (
           <div className={isPlaying ? 'timer' : 'timer--paused'}>
-            <TimerDisplay time={normalisedTime} hideZeroHours />
+            <TimerDisplay time={normalisedTime} isWrapUp={time.running <= 15} hideZeroHours />
           </div>
         )}
       </div>
 
-      {!time.finished && (
-        <div
-          className={
-            isPlaying ? 'progress-container' : 'progress-container progress-container--paused'
-          }
-        >
-          <MyProgressBar
-            now={normalisedTime}
-            complete={time.durationSeconds}
-            showElapsed={elapsed}
-          />
-        </div>
-      )}
+      {
+        !time.finished && (
+          <div
+            className={
+              isPlaying ? 'progress-container' : 'progress-container progress-container--paused'
+            }
+          >
+            <MyProgressBar
+              now={normalisedTime}
+              complete={time.durationSeconds}
+              showElapsed={elapsed}
+            />
+          </div>
+        )
+      }
 
       <AnimatePresence>
         {title.showNow && (
@@ -149,7 +151,7 @@ export default function Timer(props) {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </div >
   );
 }
 

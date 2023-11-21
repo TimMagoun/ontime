@@ -16,7 +16,12 @@
     font-weight: 600;
   }
 
+  &--wrapup {
+    color: $timer-wrapup-color;
+  }
+  
   &--finished {
     color: $timer-finished-color;
   }
+
 }

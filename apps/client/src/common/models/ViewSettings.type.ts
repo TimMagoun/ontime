@@ -4,8 +4,8 @@ export const viewsSettingsPlaceholder: ViewSettings = {
   overrideStyles: false,
   normalColor: '#ffffffcc',
   warningColor: '#FFAB33',
-  warningThreshold: 120000,
+  warningThreshold: 120,
   dangerColor: '#ED3333',
-  dangerThreshold: 60000,
+  dangerThreshold: 60,
   endMessage: '',
 };

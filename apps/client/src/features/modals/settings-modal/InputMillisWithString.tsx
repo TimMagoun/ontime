@@ -2,10 +2,10 @@ import { useController, UseControllerProps } from 'react-hook-form';
 import { Input } from '@chakra-ui/react';
 import { ViewSettings } from 'ontime-types';
 
-import { millisToMinutes } from '../../../common/utils/dateConfig';
+import { millisToSeconds } from '../../../common/utils/dateConfig';
 import { inputProps } from '../modalHelper';
 
-export default function InputMillisWithString(props: UseControllerProps<ViewSettings>) {
+export default function InputNumberWithString(props: UseControllerProps<ViewSettings>) {
   const { name, control } = props;
   const {
     field: { onChange, value },
@@ -28,7 +28,7 @@ export default function InputMillisWithString(props: UseControllerProps<ViewSett
       width='75px'
       size='sm'
       maxLength={3}
-      defaultValue={millisToMinutes(value as number)}
+      defaultValue={value as number}
       onChange={onChange}
     />
   );

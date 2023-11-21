@@ -16,7 +16,7 @@ import ModalLink from '../ModalLink';
 import ModalSplitInput from '../ModalSplitInput';
 import OntimeModalFooter from '../OntimeModalFooter';
 
-import InputMillisWithString from './InputMillisWithString';
+import InputNumberWithString from './InputMillisWithString';
 
 import style from './SettingsModal.module.scss';
 
@@ -49,11 +49,11 @@ export default function ViewSettingsForm() {
   const onSubmit = async (formData: ViewSettings) => {
     const parsedWarningThreshold = dirtyFields?.warningThreshold
       ? // @ts-expect-error -- trust me
-        Number.parseInt(formData.warningThreshold) * mtm
+        Number.parseInt(formData.warningThreshold)
       : formData.warningThreshold;
     const parsedDangerThreshold = dirtyFields?.dangerThreshold
       ? // @ts-expect-error -- trust me
-        Number.parseInt(formData.dangerThreshold) * mtm
+        Number.parseInt(formData.dangerThreshold)
       : formData.dangerThreshold;
 
     const newData = {
@@ -111,21 +111,21 @@ export default function ViewSettingsForm() {
         <PopoverPickerRHF name='normalColor' control={control} />
       </ModalSplitInput>
       <ModalSplitInput
-        field='warningColor'
-        title='Warning Color'
-        description='Time (in minutes) when the timer moves to warning mode'
+        field='warningThreshold'
+        title='Warning Threshold'
+        description='Time (in seconds) when the timer moves to warning mode'
       >
-        <InputMillisWithString name='warningThreshold' control={control} />
+        <InputNumberWithString name='warningThreshold' control={control} />
       </ModalSplitInput>
       <ModalSplitInput field='warningColor' title='Warning Color' description='Colour of timer in warning mode'>
         <PopoverPickerRHF name='warningColor' control={control} />
       </ModalSplitInput>
       <ModalSplitInput
         field='dangerThreshold'
-        title='Danger colour'
-        description='Time (in minutes) when the timer moves to danger mode'
+        title='Danger Threshold'
+        description='Time (in seconds) when the timer moves to danger mode'
       >
-        <InputMillisWithString name='dangerThreshold' control={control} />
+        <InputNumberWithString name='dangerThreshold' control={control} />
       </ModalSplitInput>
       <ModalSplitInput field='dangerColor' title='Timer colour' description='Colour of timer in danger mode'>
         <PopoverPickerRHF name='dangerColor' control={control} />
